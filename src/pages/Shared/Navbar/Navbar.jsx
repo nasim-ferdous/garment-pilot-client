@@ -1,65 +1,151 @@
 import React from "react";
 import { Link, NavLink } from "react-router";
+import useAuth from "../../../hooks/useAuth";
 
 const Navbar = () => {
-  const links = (
+  const { user, logOutUser } = useAuth();
+  const mainLinks = (
     <>
       <li>
-        <NavLink>Home</NavLink>
+        <NavLink to={"/"}>Home</NavLink>
       </li>
       <li>
-        <NavLink>All-Product</NavLink>
+        <NavLink to={"/all-products"}>All-Product</NavLink>
       </li>
       <li>
-        <NavLink>About Us</NavLink>
+        <NavLink to={"/about"}>About Us</NavLink>
       </li>
       <li>
-        <NavLink>Contact</NavLink>
+        <NavLink to={"/contact"}>Contact</NavLink>
+      </li>
+      <li>
+        <NavLink to={"/product-detail"}>Product Detail</NavLink>
+      </li>
+    </>
+  );
+
+  const afterLoginLinks = (
+    <>
+      <li>
+        <NavLink to={"/"}>Home</NavLink>
+      </li>
+      <li>
+        <NavLink to={"/all-products"}>All-Product</NavLink>
+      </li>
+      <li>
+        <NavLink to={"/dashboard"}>Dashboard</NavLink>
+      </li>
+      <li>
+        <NavLink to={"/product-detail"}>Product Detail</NavLink>
       </li>
     </>
   );
   return (
-    <div className="navbar bg-base-100 shadow-sm">
+    <div className="navbar bg-base-100 shadow-md sticky top-0 z-50">
+      {/* LEFT - LOGO */}
       <div className="navbar-start">
+        {/* Mobile Dropdown */}
         <div className="dropdown">
-          <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+          <label tabIndex={0} className="btn btn-ghost lg:hidden">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
+              className="h-6 w-6"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
             >
-              {" "}
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth="2"
-                d="M4 6h16M4 12h8m-8 6h16"
-              />{" "}
+                d="M4 6h16M4 12h16M4 18h16"
+              />
             </svg>
-          </div>
+          </label>
+
+          {/* Mobile Menu */}
           <ul
-            tabIndex="-1"
-            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+            tabIndex={0}
+            className="menu menu-sm dropdown-content bg-base-100 rounded-box w-52 shadow mt-3 z-100"
           >
-            {links}
+            {user ? afterLoginLinks : mainLinks}
+
+            {!user && (
+              <>
+                <li>
+                  <NavLink to={"/login"}>Login</NavLink>
+                </li>
+                <li>
+                  <NavLink to={"/register"}>Register</NavLink>
+                </li>
+              </>
+            )}
           </ul>
         </div>
-        <Link to={"/"} className="btn btn-ghost text-xl">
+
+        {/* Logo */}
+        <Link
+          to={"/"}
+          className="btn btn-ghost text-2xl font-bold tracking-wide"
+        >
           GarmentPilot
         </Link>
       </div>
+
+      {/* CENTER - NAV LINKS (Desktop Only) */}
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">{links}</ul>
+        <ul className="menu menu-horizontal px-1">
+          {user ? afterLoginLinks : mainLinks}
+        </ul>
       </div>
-      <div className="navbar-end space-x-2">
-        <Link to={"/login"} className="btn btn-primary">
-          Login
-        </Link>
-        <Link to={"/register"} className="btn btn-primary">
-          Register
-        </Link>
+
+      {/* RIGHT SIDE */}
+      <div className="navbar-end space-x-3">
+        {/* IF LOGGED OUT */}
+        {!user && (
+          <>
+            <Link to={"/login"} className="btn btn-outline btn-primary">
+              Login
+            </Link>
+            <Link to={"/register"} className="btn btn-primary">
+              Register
+            </Link>
+          </>
+        )}
+
+        {/* IF LOGGED IN */}
+        {user && (
+          <>
+            {/* Avatar */}
+            <div className="dropdown dropdown-end">
+              <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                <div className="w-10 rounded-full">
+                  <img
+                    src={user?.photoURL || "https://i.ibb.co/2hY4Z1p/user.png"}
+                    alt="User Avatar"
+                  />
+                </div>
+              </label>
+
+              <ul
+                tabIndex={0}
+                className="menu menu-sm dropdown-content bg-base-100 rounded-box w-52 shadow z-100"
+              >
+                <li className="font-semibold text-lg px-3 py-2">
+                  {user.displayName || "user"}
+                </li>
+                <li>
+                  <NavLink to="/dashboard/profile">Profile</NavLink>
+                </li>
+                <li>
+                  <button onClick={logOutUser} className="text-red-500">
+                    Logout
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

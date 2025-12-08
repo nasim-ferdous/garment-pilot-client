@@ -3,6 +3,8 @@ import RootLayout from "../layouts/RootLayout";
 import Home from "../pages/Home/Home/Home";
 import Register from "../pages/auth/Register/Register";
 import Login from "../pages/auth/Login/Login";
+import ProductDetail from "../pages/ProductDetail/ProductDetail";
+import PrivetRoute from "./PrivetRoute";
 
 export const router = createBrowserRouter([
   {
@@ -20,6 +22,14 @@ export const router = createBrowserRouter([
       {
         path: "login",
         element: <Login></Login>,
+      },
+      {
+        path: "product-detail",
+        element: (
+          <PrivetRoute>
+            <ProductDetail></ProductDetail>
+          </PrivetRoute>
+        ),
       },
     ],
   },

@@ -34,7 +34,6 @@ const AuthProvider = ({ children }) => {
   };
   //   update user
   const updateProfileUser = (updated) => {
-    setLoading(true);
     return updateProfile(auth.currentUser, updated);
   };
 
