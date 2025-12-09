@@ -40,3 +40,11 @@
 .read-the-docs {
   color: #888;
 }
+
+/* Linear background for Home page */
+.home-linear-bg {
+  background: linear-gradient(135deg, #f8fafc 0%, #eef2ff 40%, #e6fffa 100%);
+  min-height: 100vh;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
