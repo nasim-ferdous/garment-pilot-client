@@ -16,12 +16,11 @@ const Register = () => {
   const navigate = useNavigate();
 
   const onSubmit = (data) => {
-    console.log(data.photo[0]);
     const profileImg = data.photo[0];
 
     createUser(data.email, data.password).then((result) => {
       const user = result.user;
-      console.log(user);
+      console.log("created user:", user);
 
       // image upload
       const formData = new FormData();
@@ -51,6 +50,7 @@ const Register = () => {
 
   return (
     <div className="hero bg-base-200 min-h-screen">
+      <title>garment-pilot-register</title>
       <div className="hero-content flex-col lg:flex-row-reverse">
         <div className="text-center lg:text-left">
           <h1 className="text-5xl font-bold">Register Now!</h1>
@@ -95,7 +95,7 @@ const Register = () => {
                 <label className="label">Role</label>
                 <select
                   {...register("role", { required: true })}
-                  defaultValue="Pick a color"
+                  defaultValue="buyer"
                   className="select"
                 >
                   <option disabled={true}>Role</option>

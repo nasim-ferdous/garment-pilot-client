@@ -5,6 +5,7 @@ import Register from "../pages/auth/Register/Register";
 import Login from "../pages/auth/Login/Login";
 import ProductDetail from "../pages/ProductDetail/ProductDetail";
 import PrivetRoute from "./PrivetRoute";
+import AddProduct from "../pages/AddProduct/AddProduct";
 
 export const router = createBrowserRouter([
   {
@@ -28,6 +29,14 @@ export const router = createBrowserRouter([
         element: (
           <PrivetRoute>
             <ProductDetail></ProductDetail>
+          </PrivetRoute>
+        ),
+      },
+      {
+        path: "add-product",
+        element: (
+          <PrivetRoute>
+            <AddProduct></AddProduct>
           </PrivetRoute>
         ),
       },

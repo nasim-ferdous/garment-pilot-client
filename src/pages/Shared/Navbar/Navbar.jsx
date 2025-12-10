@@ -18,9 +18,6 @@ const Navbar = () => {
       <li>
         <NavLink to={"/contact"}>Contact</NavLink>
       </li>
-      <li>
-        <NavLink to={"/product-detail"}>Product Detail</NavLink>
-      </li>
     </>
   );
 
@@ -35,8 +32,9 @@ const Navbar = () => {
       <li>
         <NavLink to={"/dashboard"}>Dashboard</NavLink>
       </li>
+
       <li>
-        <NavLink to={"/product-detail"}>Product Detail</NavLink>
+        <NavLink to={"/add-product"}>Add Product</NavLink>
       </li>
     </>
   );
@@ -104,7 +102,7 @@ const Navbar = () => {
         {/* IF LOGGED OUT */}
         {!user && (
           <>
-            <Link to={"/login"} className="btn btn-outline btn-primary">
+            <Link to={"/login"} className="btn  btn-primary">
               Login
             </Link>
             <Link to={"/register"} className="btn btn-primary">
