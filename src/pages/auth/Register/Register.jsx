@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router";
 import useAuth from "../../../hooks/useAuth";
 import SocialLogin from "../SocialLogin/SocialLogin";
 import axios from "axios";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const Register = () => {
   const { createUser, updateProfileUser } = useAuth();
@@ -14,14 +15,12 @@ const Register = () => {
   } = useForm();
   const location = useLocation();
   const navigate = useNavigate();
+  const axiosSecure = useAxiosSecure();
 
   const onSubmit = (data) => {
     const profileImg = data.photo[0];
 
-    createUser(data.email, data.password).then((result) => {
-      const user = result.user;
-      console.log("created user:", user);
-
+    createUser(data.email, data.password).then(() => {
       // image upload
       const formData = new FormData();
       formData.append("image", profileImg);
@@ -31,12 +30,27 @@ const Register = () => {
       }`;
 
       axios.post(image_API_URL, formData).then((res) => {
-        console.log("after image upload", res.data.data.display_url);
+        const photoURL = res.data.data.display_url;
+        // create user in the database
+
+        const userInfo = {
+          displayName: data.name,
+          photoURL: photoURL,
+          email: data.email,
+          role: data.role,
+          createdAt: new Date().toLocaleString(),
+        };
+
+        axiosSecure.post("/users", userInfo).then((res) => {
+          if (res.data.insertedId) {
+            console.log("user created in db", res.data);
+          }
+        });
 
         //   update profile
         const updatedUser = {
           displayName: data.name,
-          photoURL: res.data.data.display_url,
+          photoURL: photoURL,
         };
         updateProfileUser(updatedUser)
           .then(() => {

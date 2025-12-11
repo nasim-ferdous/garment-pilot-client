@@ -2,6 +2,8 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import useAuth from "../../hooks/useAuth";
 
 const AddProduct = () => {
   const {
@@ -9,6 +11,8 @@ const AddProduct = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const axiosSecure = useAxiosSecure();
+  const { user } = useAuth();
 
   const [previews, setPreviews] = useState([]);
 
@@ -84,7 +88,15 @@ const AddProduct = () => {
         paymentOptions: data.paymentOptions,
         showOnHomePage: data.showOnHomePage,
         createdAt: new Date().toLocaleString(),
+        createdBy: user.email,
       };
+      axiosSecure.post("/products", productPayload).then((res) => {
+        if (res.data.insertedId) {
+          toast.success("Product added successfully!");
+        } else {
+          toast.error("Failed to add product.");
+        }
+      });
 
       console.log("Product payload ready:", productPayload);
     } catch (err) {
@@ -138,6 +150,7 @@ const AddProduct = () => {
                 <option value="pant">pant</option>
                 <option value="jacket">jacket</option>
                 <option value="hoodie">hoodie</option>
+                <option value="Accessories"> accessories</option>
               </select>
               {errors.category?.type === "required" && (
                 <p className="text-red-600" role="alert">
@@ -239,14 +252,13 @@ const AddProduct = () => {
 
               {/* show on home page */}
               <label className="label">Show on Home Page</label>
-              <select
+
+              <input
+                type="checkbox"
                 {...register("showOnHomePage")}
-                className="select w-full"
-                defaultValue="false"
-              >
-                <option value="false">false</option>
-                <option value="true">true</option>
-              </select>
+                defaultChecked={false}
+                className="checkbox checkbox-xl"
+              />
 
               <button className="btn btn-primary mt-4">Submit</button>
             </fieldset>
