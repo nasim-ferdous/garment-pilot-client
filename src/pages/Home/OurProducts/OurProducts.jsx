@@ -1,9 +1,7 @@
 import React from "react";
-import { motion } from "framer-motion";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import Loading from "../../../components/Loading/Loading";
-import { Link } from "react-router";
 import ProductCard from "../../../components/ProductCard/ProductCard";
 
 const OurProducts = () => {
@@ -12,9 +10,7 @@ const OurProducts = () => {
   const { data: products = [], isLoading } = useQuery({
     queryKey: ["our-products"],
     queryFn: async () => {
-      const res = await axiosSecure.get(
-        "/products/our-products?showOnHomePage=true"
-      );
+      const res = await axiosSecure.get("/our-products?showOnHomePage=true");
       return res.data;
     },
   });

@@ -107,6 +107,7 @@ const AddProduct = () => {
 
   return (
     <div className="flex flex-col justify-center items-center gap-6">
+      <title>Add-products</title>
       <h3 className="text-4xl text-center">Add your product</h3>
       <form className="w-full max-w-md mb-8" onSubmit={handleSubmit(onSubmit)}>
         <div className="card bg-base-200 shrink-0 shadow-2xl">

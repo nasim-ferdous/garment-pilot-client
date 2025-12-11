@@ -19,6 +19,7 @@ const AllProducts = () => {
   }
   return (
     <div className="px-6 md:px-16 py-10">
+      <title>All Products</title>
       <h3 className="text-3xl font-bold mb-6">
         All Products: {products.length}
       </h3>

@@ -20,7 +20,7 @@ const Banner = () => {
           innovation — perfect for every occasion.
         </p>
 
-        <Link to="/all-product" className="btn btn-primary btn-lg">
+        <Link to="/all-products" className="btn btn-primary btn-lg">
           View Products
         </Link>
       </motion.div>
