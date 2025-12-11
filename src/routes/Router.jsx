@@ -6,6 +6,8 @@ import Login from "../pages/auth/Login/Login";
 import ProductDetail from "../pages/ProductDetail/ProductDetail";
 import PrivetRoute from "./PrivetRoute";
 import AddProduct from "../pages/AddProduct/AddProduct";
+import Dashboard from "../pages/Dashboard/Dashboard/Dashboard";
+import AllProducts from "../pages/AllProducts/AllProducts";
 
 export const router = createBrowserRouter([
   {
@@ -25,7 +27,11 @@ export const router = createBrowserRouter([
         element: <Login></Login>,
       },
       {
-        path: "product-detail",
+        path: "all-products",
+        element: <AllProducts></AllProducts>,
+      },
+      {
+        path: "product/:id",
         element: (
           <PrivetRoute>
             <ProductDetail></ProductDetail>
@@ -39,6 +45,15 @@ export const router = createBrowserRouter([
             <AddProduct></AddProduct>
           </PrivetRoute>
         ),
+      },
+      {
+        path: "dashboard",
+        element: (
+          <PrivetRoute>
+            <Dashboard></Dashboard>
+          </PrivetRoute>
+        ),
+        children: [],
       },
     ],
   },
