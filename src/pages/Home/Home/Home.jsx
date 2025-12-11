@@ -6,6 +6,7 @@ import HowItWorks from "../HowItWorks/HowItWorks";
 import CustomerFeedback from "../CustomerFeedback/CustomerFeedback";
 import Brands from "../Brands/Brands";
 import ManagersInfo from "../ManagersInfo/ManagersInfo";
+import OurProducts from "../OurProducts/OurProducts";
 
 const Home = () => {
   return (
@@ -15,6 +16,7 @@ const Home = () => {
         <Banner></Banner>
 
         {/*  OUR PRODUCTS  */}
+        <OurProducts></OurProducts>
 
         {/*  HOW IT WORKS  */}
         <HowItWorks></HowItWorks>
