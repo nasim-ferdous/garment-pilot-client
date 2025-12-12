@@ -8,6 +8,7 @@ import PrivetRoute from "./PrivetRoute";
 import AddProduct from "../pages/AddProduct/AddProduct";
 import Dashboard from "../pages/Dashboard/Dashboard/Dashboard";
 import AllProducts from "../pages/AllProducts/AllProducts";
+import PaymentSuccess from "../pages/Payment/PaymentSuccess";
 
 export const router = createBrowserRouter([
   {
@@ -37,6 +38,10 @@ export const router = createBrowserRouter([
             <ProductDetail></ProductDetail>
           </PrivetRoute>
         ),
+      },
+      {
+        path: "payment-success",
+        element: <PaymentSuccess></PaymentSuccess>,
       },
       {
         path: "add-product",

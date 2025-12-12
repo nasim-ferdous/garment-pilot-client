@@ -21,17 +21,22 @@ const ProductDetail = () => {
     },
   });
   const handleBookingSubmit = async (bookingInfo) => {
-    console.log("fromdetail", bookingInfo);
-    if (bookingInfo.paymentOption === "Stripe") {
+    console.log("fromDetail", bookingInfo);
+    if (bookingInfo.paymentOption === "stripe") {
       // redirect to payment page later
+      axiosSecure.post("/create-checkout-session", bookingInfo).then((res) => {
+        if (res.data.url) {
+          window.location.assign(res.data.url);
+        }
+      });
     }
     // todo: save booking info to database
-    const res = await axiosSecure.post("/bookings", bookingInfo);
+    // const res = await axiosSecure.post("/bookings", bookingInfo);
 
-    if (res.data.insertedId) {
-      toast.success("Booking successful!");
-      setOpenModal(false);
-    }
+    // if (res.data.insertedId) {
+    //   toast.success("Booking successful!");
+    //   setOpenModal(false);
+    // }
   };
 
   if (isLoading) return <Loading></Loading>;

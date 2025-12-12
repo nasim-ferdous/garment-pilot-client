@@ -18,8 +18,12 @@ const BookingModal = ({ product, user, onClose, onSubmitBooking }) => {
     const bookingInfo = {
       ...data,
       productId: product._id,
+      image: product.images?.[0],
       totalPrice,
       paymentOption: product.paymentOptions,
+      manager: product.createdBy,
+      status: "pending",
+      orderedAt: new Date().toLocaleString(),
     };
 
     onSubmitBooking(bookingInfo);
@@ -27,6 +31,7 @@ const BookingModal = ({ product, user, onClose, onSubmitBooking }) => {
 
   return (
     <dialog className="modal modal-open">
+      <title>Order Booking</title>
       <div className="modal-box max-w-lg">
         <h3 className="font-bold text-2xl mb-4">Book Product</h3>
 
