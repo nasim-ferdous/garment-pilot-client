@@ -1,61 +1,139 @@
-import React from "react";
+import React, { useState } from "react";
 import useAuth from "../../../hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { BiDetail } from "react-icons/bi";
 import { RiDeleteBin2Fill } from "react-icons/ri";
+import Loading from "../../../components/Loading/Loading";
+import OrderDetailModal from "./OrderDetailModal";
 
 const MyOrders = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
-  const { data: orders = [] } = useQuery({
+  const [selectedOrder, setSelectedOrder] = useState(null);
+  const { data: orders = [], isLoading } = useQuery({
     queryKey: ["my-orders", user?.email],
     queryFn: async () => {
       const res = await axiosSecure.get(`/my-orders?email=${user.email}`);
       return res.data;
     },
   });
+  const handleCancelOrder= (order)=>{
+    
+  }
+
+  if (isLoading) {
+    return <Loading></Loading>;
+  }
   return (
-    <div>
-      <h2>My Orders:{orders.length}</h2>
-      <div className="overflow-x-auto">
-        <table className="table table-zebra">
-          {/* head */}
-          <thead>
-            <tr>
-              <th>Order Id</th>
-              <th>Product Name</th>
-              <th>Quantity</th>
-              <th>Status</th>
-              <th>Payment</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {orders.map((order) => (
-              <tr key={order._id}>
-                <th>{order._id}</th>
-                <td>{order.productName}</td>
-                <td>{order.orderQuantity}</td>
-                <td>{order.status}</td>
-                <td>{order.paymentStatus}</td>
-                <td>
-                  <div className="tooltip" data-tip="View Details">
-                    <button className="btn btn-primary btn-sm">
-                      <BiDetail />
-                    </button>
-                  </div>
-                  <div className="tooltip ml-2" data-tip="Cancel">
-                    <button className="btn btn-primary btn-sm">
-                      <RiDeleteBin2Fill />
-                    </button>
-                  </div>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+    <div className="p-4 md:p-8">
+      {/* Page Header */}
+      <div className="mb-6">
+        <h2 className="text-3xl font-bold">My Orders</h2>
+        <p className="text-gray-500 mt-1">
+          Track and manage your garment orders
+        </p>
       </div>
+
+      {/* Table Card */}
+      <div className="card bg-base-100 shadow-xl">
+        <div className="card-body p-0">
+          <div className="overflow-x-auto">
+            <table className="table table-zebra">
+              {/* head */}
+              <thead className="bg-base-200 text-base">
+                <tr>
+                  <th>#</th>
+                  <th>Product</th>
+                  <th>Quantity</th>
+                  <th>Status</th>
+                  <th>Payment</th>
+                  <th className="text-center">Actions</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                {orders.map((order, index) => (
+                  <tr key={order._id}>
+                    <td>{index + 1}</td>
+
+                    <td>
+                      <div className="font-semibold">{order.productName}</div>
+                      <div className="text-xs text-gray-500">
+                        Order ID: {order._id}
+                      </div>
+                    </td>
+
+                    <td>{order.orderQuantity}</td>
+
+                    <td>
+                      <span
+                        className={`badge 
+    ${order.status === "pending" && "badge-warning"}
+    ${order.status === "processing" && "badge-info"}
+    ${order.status === "delivered" && "badge-success"}
+  `}
+                      >
+                        {order.status}
+                      </span>
+                    </td>
+
+                    <td>
+                      <span
+                        className={`badge badge-sm ${
+                          order.paymentStatus === "paid"
+                            ? "badge-success"
+                            : "badge-error"
+                        }`}
+                      >
+                        {order.paymentStatus}
+                      </span>
+                    </td>
+
+                    <td className="text-center">
+                      <div className="flex justify-center gap-2">
+                        <div className="tooltip" data-tip="View Details">
+                          <button
+                            onClick={() => setSelectedOrder(order)}
+                            className="btn btn-primary btn-sm"
+                          >
+                            <BiDetail className="text-lg" />
+                          </button>
+                        </div>
+
+                        {order.status === "pending" && (
+                          <div className="tooltip ml-2" data-tip="Cancel Order">
+                            <button
+                              //   onClick={() => handleCancel(order)}
+                              className="btn btn-error btn-sm"
+                            >
+                              <RiDeleteBin2Fill />
+                            </button>
+                          </div>
+                        )}
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+
+                {orders.length === 0 && (
+                  <tr>
+                    <td colSpan="6" className="text-center py-8 text-gray-500">
+                      No orders found
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      {selectedOrder && (
+        <OrderDetailModal
+          order={selectedOrder}
+          onClose={() => setSelectedOrder(null)}
+        />
+      )}
     </div>
   );
 };

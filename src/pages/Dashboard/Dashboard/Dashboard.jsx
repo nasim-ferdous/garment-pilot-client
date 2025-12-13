@@ -4,7 +4,7 @@ import { LuShoppingBag } from "react-icons/lu";
 
 const Dashboard = () => {
   return (
-    <div className="drawer lg:drawer-open">
+    <div className="drawer lg:drawer-open bg-base-100">
       <title>Dashboard</title>
       <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content">
@@ -78,7 +78,7 @@ const Dashboard = () => {
                 data-tip="My Orders"
               >
                 {/* my-orders icon */}
-             <LuShoppingBag></LuShoppingBag>
+                <LuShoppingBag></LuShoppingBag>
                 <span className="is-drawer-close:hidden">My Orders</span>
               </Link>
             </li>
