@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, Outlet } from "react-router";
+import { LuShoppingBag } from "react-icons/lu";
 
 const Dashboard = () => {
   return (
@@ -34,7 +35,6 @@ const Dashboard = () => {
         </nav>
         <Outlet></Outlet>
         {/* Page content here */}
-        <div className="p-4">Page Content</div>
       </div>
 
       <div className="drawer-side is-drawer-close:overflow-visible">
@@ -68,6 +68,18 @@ const Dashboard = () => {
                   <path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
                 </svg>
                 <span className="is-drawer-close:hidden">Homepage</span>
+              </Link>
+            </li>
+            {/* My Dashboard Links */}
+            <li>
+              <Link
+                to={"/dashboard/my-orders"}
+                className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                data-tip="My Orders"
+              >
+                {/* my-orders icon */}
+             <LuShoppingBag></LuShoppingBag>
+                <span className="is-drawer-close:hidden">My Orders</span>
               </Link>
             </li>
 

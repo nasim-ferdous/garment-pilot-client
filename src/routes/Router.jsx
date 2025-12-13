@@ -9,6 +9,7 @@ import AddProduct from "../pages/AddProduct/AddProduct";
 import Dashboard from "../pages/Dashboard/Dashboard/Dashboard";
 import AllProducts from "../pages/AllProducts/AllProducts";
 import PaymentSuccess from "../pages/Payment/PaymentSuccess";
+import MyOrders from "../pages/Dashboard/MyOrders/MyOrders";
 
 export const router = createBrowserRouter([
   {
@@ -58,7 +59,12 @@ export const router = createBrowserRouter([
             <Dashboard></Dashboard>
           </PrivetRoute>
         ),
-        children: [],
+        children: [
+          {
+            path: "my-orders",
+            element: <MyOrders></MyOrders>,
+          },
+        ],
       },
     ],
   },

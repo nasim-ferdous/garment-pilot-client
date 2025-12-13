@@ -13,7 +13,11 @@ const ProductDetail = () => {
   const [openModal, setOpenModal] = useState(false);
   const { user } = useAuth();
 
-  const { data: product = {}, isLoading } = useQuery({
+  const {
+    data: product = {},
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["product-details", id],
     queryFn: async () => {
       const res = await axiosSecure.get(`/products/${id}`);
@@ -24,11 +28,13 @@ const ProductDetail = () => {
     console.log("fromDetail", bookingInfo);
     if (bookingInfo.paymentOption === "stripe") {
       // redirect to payment page later
-      axiosSecure.post("/create-checkout-session", bookingInfo).then((res) => {
-        if (res.data.url) {
-          window.location.assign(res.data.url);
-        }
-      });
+      return axiosSecure
+        .post("/create-checkout-session", bookingInfo)
+        .then((res) => {
+          if (res.data.url) {
+            window.location.assign(res.data.url);
+          }
+        });
     }
     // todo: save booking info to database
     const res = await axiosSecure.post("/orders", bookingInfo);
@@ -37,6 +43,7 @@ const ProductDetail = () => {
     if (res.data.orderId) {
       toast.success("Booking successful!");
       setOpenModal(false);
+      refetch();
     }
   };
 
