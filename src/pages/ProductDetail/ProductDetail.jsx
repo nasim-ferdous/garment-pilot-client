@@ -31,12 +31,13 @@ const ProductDetail = () => {
       });
     }
     // todo: save booking info to database
-    // const res = await axiosSecure.post("/bookings", bookingInfo);
+    const res = await axiosSecure.post("/orders", bookingInfo);
+    console.log(res.data);
 
-    // if (res.data.insertedId) {
-    //   toast.success("Booking successful!");
-    //   setOpenModal(false);
-    // }
+    if (res.data.orderId) {
+      toast.success("Booking successful!");
+      setOpenModal(false);
+    }
   };
 
   if (isLoading) return <Loading></Loading>;

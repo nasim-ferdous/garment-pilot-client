@@ -22,8 +22,6 @@ const BookingModal = ({ product, user, onClose, onSubmitBooking }) => {
       totalPrice,
       paymentOption: product.paymentOptions,
       manager: product.createdBy,
-      status: "pending",
-      orderedAt: new Date().toLocaleString(),
     };
 
     onSubmitBooking(bookingInfo);
