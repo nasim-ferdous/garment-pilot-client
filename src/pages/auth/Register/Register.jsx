@@ -5,6 +5,7 @@ import useAuth from "../../../hooks/useAuth";
 import SocialLogin from "../SocialLogin/SocialLogin";
 import axios from "axios";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import toast from "react-hot-toast";
 
 const Register = () => {
   const { createUser, updateProfileUser } = useAuth();
@@ -43,7 +44,7 @@ const Register = () => {
 
         axiosSecure.post("/users", userInfo).then((res) => {
           if (res.data.insertedId) {
-            console.log("user created in db", res.data);
+            toast.success("user Registered");
           }
         });
 

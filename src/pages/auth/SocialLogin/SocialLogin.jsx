@@ -2,6 +2,7 @@ import React from "react";
 import useAuth from "../../../hooks/useAuth";
 import { useLocation, useNavigate } from "react-router";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import toast from "react-hot-toast";
 
 const SocialLogin = () => {
   const { googleSignIn } = useAuth();
@@ -15,7 +16,7 @@ const SocialLogin = () => {
         navigate(location.state || "/");
 
         const userInfo = {
-          displayName: user.name,
+          displayName: user.displayName,
           photoURL: user.photoURL,
           email: user.email,
           role: "buyer",
@@ -23,7 +24,7 @@ const SocialLogin = () => {
         };
         axiosSecure.post("/users", userInfo).then((res) => {
           if (res.data.insertedId) {
-            console.log("user created in db", res.data);
+            toast.success("user Login");
           }
         });
       })

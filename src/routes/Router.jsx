@@ -10,6 +10,7 @@ import Dashboard from "../pages/Dashboard/Dashboard/Dashboard";
 import AllProducts from "../pages/AllProducts/AllProducts";
 import PaymentSuccess from "../pages/Payment/PaymentSuccess";
 import MyOrders from "../pages/Dashboard/MyOrders/MyOrders";
+import ManageProducts from "../pages/Dashboard/ManageProducts/ManageProducts";
 
 export const router = createBrowserRouter([
   {
@@ -63,6 +64,10 @@ export const router = createBrowserRouter([
           {
             path: "my-orders",
             element: <MyOrders></MyOrders>,
+          },
+          {
+            path: "manage-products",
+            element: <ManageProducts></ManageProducts>,
           },
         ],
       },

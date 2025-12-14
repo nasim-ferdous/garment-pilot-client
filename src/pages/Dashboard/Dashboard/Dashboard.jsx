@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, Outlet } from "react-router";
 import { LuShoppingBag } from "react-icons/lu";
+import { MdInventory } from "react-icons/md";
 
 const Dashboard = () => {
   return (
@@ -80,6 +81,17 @@ const Dashboard = () => {
                 {/* my-orders icon */}
                 <LuShoppingBag></LuShoppingBag>
                 <span className="is-drawer-close:hidden">My Orders</span>
+              </Link>
+            </li>
+            <li>
+              <Link
+                to={"/dashboard/manage-products"}
+                className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                data-tip="Manage Products"
+              >
+                {/*Manage product icon */}
+                <MdInventory></MdInventory>
+                <span className="is-drawer-close:hidden">Manage Products</span>
               </Link>
             </li>
 
