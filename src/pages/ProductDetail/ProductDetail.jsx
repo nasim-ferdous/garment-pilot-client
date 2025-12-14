@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import Loading from "../../components/Loading/Loading";
@@ -12,6 +12,7 @@ const ProductDetail = () => {
   const axiosSecure = useAxiosSecure();
   const [openModal, setOpenModal] = useState(false);
   const { user } = useAuth();
+  const navigate = useNavigate();
 
   const {
     data: product = {},
@@ -44,6 +45,7 @@ const ProductDetail = () => {
       toast.success("Booking successful!");
       setOpenModal(false);
       refetch();
+      navigate("/dashboard/my-orders");
     }
   };
 

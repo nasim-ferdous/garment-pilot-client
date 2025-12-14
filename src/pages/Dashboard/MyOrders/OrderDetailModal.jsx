@@ -3,6 +3,7 @@ import React from "react";
 const OrderDetailModal = ({ order, onClose }) => {
   return (
     <dialog open className="modal">
+      <title>Order Detail</title>
       <div className="modal-box max-w-2xl">
         <h3 className="font-bold text-xl mb-4">Order Details</h3>
 

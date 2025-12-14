@@ -6,27 +6,54 @@ import { BiDetail } from "react-icons/bi";
 import { RiDeleteBin2Fill } from "react-icons/ri";
 import Loading from "../../../components/Loading/Loading";
 import OrderDetailModal from "./OrderDetailModal";
+import Swal from "sweetalert2";
 
 const MyOrders = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const [selectedOrder, setSelectedOrder] = useState(null);
-  const { data: orders = [], isLoading } = useQuery({
+  const {
+    data: orders = [],
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["my-orders", user?.email],
     queryFn: async () => {
       const res = await axiosSecure.get(`/my-orders?email=${user.email}`);
       return res.data;
     },
   });
-  const handleCancelOrder= (order)=>{
-    
-  }
+  const handleCancelOrder = (order) => {
+    Swal.fire({
+      title: "Cancel Order?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Cancel it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.delete(`/cancel-order/${order._id}`).then((res) => {
+          console.log(res.data);
+
+          Swal.fire({
+            title: "Canceled!",
+            text: "Your Order has been canceled.",
+            icon: "success",
+          });
+          refetch();
+        });
+      }
+    });
+  };
 
   if (isLoading) {
     return <Loading></Loading>;
   }
   return (
     <div className="p-4 md:p-8">
+      <title>My Orders</title>
       {/* Page Header */}
       <div className="mb-6">
         <h2 className="text-3xl font-bold">My Orders</h2>
@@ -60,7 +87,7 @@ const MyOrders = () => {
                     <td>
                       <div className="font-semibold">{order.productName}</div>
                       <div className="text-xs text-gray-500">
-                        Order ID: {order._id}
+                        Tracking Id: {order.trackingId}
                       </div>
                     </td>
 
@@ -104,7 +131,7 @@ const MyOrders = () => {
                         {order.status === "pending" && (
                           <div className="tooltip ml-2" data-tip="Cancel Order">
                             <button
-                              //   onClick={() => handleCancel(order)}
+                              onClick={() => handleCancelOrder(order)}
                               className="btn btn-error btn-sm"
                             >
                               <RiDeleteBin2Fill />
