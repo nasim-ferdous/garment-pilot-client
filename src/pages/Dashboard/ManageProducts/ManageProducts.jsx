@@ -156,7 +156,7 @@ const ManageProducts = () => {
                             onClick={() => setSelectedProduct(product)}
                             className="btn btn-primary btn-xs"
                           >
-                            <FaEdit className="text-lg" />
+                            <FaEdit />
                           </button>
                         </div>
 

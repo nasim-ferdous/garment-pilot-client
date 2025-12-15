@@ -128,7 +128,17 @@ const MyOrders = () => {
                           </button>
                         </div>
 
-                        {order.status === "pending" && (
+                        {order.status === "approved" ? (
+                          <div className="tooltip" data-tip="Cancel Order">
+                            <button
+                              onClick={() => handleCancelOrder(order)}
+                              className="btn btn-error btn-xs"
+                              disabled={true}
+                            >
+                              <RiDeleteBin2Fill />
+                            </button>
+                          </div>
+                        ) : (
                           <div className="tooltip" data-tip="Cancel Order">
                             <button
                               onClick={() => handleCancelOrder(order)}

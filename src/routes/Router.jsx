@@ -12,6 +12,7 @@ import PaymentSuccess from "../pages/Payment/PaymentSuccess";
 import MyOrders from "../pages/Dashboard/MyOrders/MyOrders";
 import ManageProducts from "../pages/Dashboard/ManageProducts/ManageProducts";
 import PendingOrder from "../pages/Dashboard/PendingOrder/PendingOrder";
+import ApprovedOrders from "../pages/Dashboard/ApprovedOrders/ApprovedOrders";
 
 export const router = createBrowserRouter([
   {
@@ -62,10 +63,12 @@ export const router = createBrowserRouter([
           </PrivetRoute>
         ),
         children: [
+          // buyer related api
           {
             path: "my-orders",
             element: <MyOrders></MyOrders>,
           },
+          // manager related apis
           {
             path: "manage-products",
             element: <ManageProducts></ManageProducts>,
@@ -73,6 +76,10 @@ export const router = createBrowserRouter([
           {
             path: "pending-orders",
             element: <PendingOrder></PendingOrder>,
+          },
+          {
+            path: "approved-orders",
+            element: <ApprovedOrders></ApprovedOrders>,
           },
         ],
       },
