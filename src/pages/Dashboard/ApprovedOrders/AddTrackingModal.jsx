@@ -27,19 +27,29 @@ const AddTrackingModal = ({ order, onClose, refetch }) => {
       ...data,
     };
 
-    await axiosSecure.post("/add-tracking", payload).then((res) => {
+    try {
+      const res = await axiosSecure.post("/add-tracking", payload);
+
       if (res.data.insertedId) {
         Swal.fire({
           position: "top-end",
           icon: "success",
-          title: "Your order tracking has been updated",
+          title: "Order tracking updated successfully",
           showConfirmButton: false,
           timer: 1500,
         });
         refetch();
         onClose();
       }
-    });
+    } catch (error) {
+      const message = error.response?.data?.message || "Something went wrong";
+
+      Swal.fire({
+        icon: "error",
+        title: "Oops!",
+        text: message,
+      });
+    }
   };
   return (
     <dialog className="modal modal-open">

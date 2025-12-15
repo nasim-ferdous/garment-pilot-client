@@ -32,19 +32,19 @@ const OrderDetailModal = ({ order, onClose }) => {
             </li>
             <li
               className={`step ${
-                ["processing", "delivered"].includes(order.status) &&
+                ["rejected", "approved"].includes(order.status) &&
                 "step-primary"
               }`}
             >
-              Processing
+              Rejected
             </li>
 
             <li
               className={`step ${
-                order.status === "delivered" && "step-primary"
+                order.status === "approved" && "step-primary"
               }`}
             >
-              Delivered
+              Approved
             </li>
           </ul>
         </div>

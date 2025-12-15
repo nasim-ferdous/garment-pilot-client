@@ -7,11 +7,13 @@ import { RiDeleteBin2Fill } from "react-icons/ri";
 import Loading from "../../../components/Loading/Loading";
 import OrderDetailModal from "./OrderDetailModal";
 import Swal from "sweetalert2";
+import ViewTrackingModal from "../ApprovedOrders/ViewTrackingModal";
 
 const MyOrders = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const [selectedOrder, setSelectedOrder] = useState(null);
+  const [trackingOrder, setTrackingOrder] = useState(null);
   const {
     data: orders = [],
     isLoading,
@@ -85,10 +87,19 @@ const MyOrders = () => {
                     <td>{index + 1}</td>
 
                     <td>
-                      <div className="font-semibold">{order.productName}</div>
-                      <div className="text-xs text-gray-500">
-                        Tracking Id: {order.trackingId}
-                      </div>
+                      <button
+                        onClick={() => setTrackingOrder(order)}
+                        className="btn"
+                      >
+                        <div className="tooltip" data-tip="track Order">
+                          <div className="font-semibold">
+                            {order.productName}
+                          </div>
+                          <div className="text-xs text-gray-500">
+                            Tracking Id: {order.trackingId}
+                          </div>
+                        </div>
+                      </button>
                     </td>
 
                     <td>{order.orderQuantity}</td>
@@ -169,6 +180,12 @@ const MyOrders = () => {
         <OrderDetailModal
           order={selectedOrder}
           onClose={() => setSelectedOrder(null)}
+        />
+      )}
+      {trackingOrder && (
+        <ViewTrackingModal
+          order={trackingOrder}
+          onClose={() => setTrackingOrder(null)}
         />
       )}
     </div>
