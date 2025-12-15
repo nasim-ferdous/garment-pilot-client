@@ -3,6 +3,7 @@ import { Link, Outlet } from "react-router";
 import { LuShoppingBag } from "react-icons/lu";
 import { MdInventory, MdPendingActions } from "react-icons/md";
 import { FaClipboardCheck } from "react-icons/fa";
+import { CgProfile } from "react-icons/cg";
 
 const Dashboard = () => {
   return (
@@ -115,6 +116,17 @@ const Dashboard = () => {
                 {/*Approved Orders icon */}
                 <FaClipboardCheck></FaClipboardCheck>
                 <span className="is-drawer-close:hidden">Approved Orders</span>
+              </Link>
+            </li>
+            <li>
+              <Link
+                to={"/dashboard/my-profile"}
+                className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                data-tip="My Profile"
+              >
+                {/*Approved Orders icon */}
+                <CgProfile />
+                <span className="is-drawer-close:hidden">My Profile</span>
               </Link>
             </li>
 

@@ -13,6 +13,7 @@ import MyOrders from "../pages/Dashboard/MyOrders/MyOrders";
 import ManageProducts from "../pages/Dashboard/ManageProducts/ManageProducts";
 import PendingOrder from "../pages/Dashboard/PendingOrder/PendingOrder";
 import ApprovedOrders from "../pages/Dashboard/ApprovedOrders/ApprovedOrders";
+import MyProfile from "../pages/Dashboard/MyProfile/MyProfile";
 
 export const router = createBrowserRouter([
   {
@@ -80,6 +81,10 @@ export const router = createBrowserRouter([
           {
             path: "approved-orders",
             element: <ApprovedOrders></ApprovedOrders>,
+          },
+          {
+            path: "my-profile",
+            element:<MyProfile></MyProfile>,
           },
         ],
       },
