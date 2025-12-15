@@ -97,8 +97,8 @@ const MyOrders = () => {
                       <span
                         className={`badge 
     ${order.status === "pending" && "badge-warning"}
-    ${order.status === "processing" && "badge-info"}
-    ${order.status === "delivered" && "badge-success"}
+    ${order.status === "rejected" && "badge-error"}
+    ${order.status === "approved" && "badge-success"}
   `}
                       >
                         {order.status}
@@ -122,17 +122,17 @@ const MyOrders = () => {
                         <div className="tooltip" data-tip="View Details">
                           <button
                             onClick={() => setSelectedOrder(order)}
-                            className="btn btn-primary btn-sm"
+                            className="btn btn-primary btn-xs"
                           >
-                            <BiDetail className="text-lg" />
+                            <BiDetail />
                           </button>
                         </div>
 
                         {order.status === "pending" && (
-                          <div className="tooltip ml-2" data-tip="Cancel Order">
+                          <div className="tooltip" data-tip="Cancel Order">
                             <button
                               onClick={() => handleCancelOrder(order)}
-                              className="btn btn-error btn-sm"
+                              className="btn btn-error btn-xs"
                             >
                               <RiDeleteBin2Fill />
                             </button>

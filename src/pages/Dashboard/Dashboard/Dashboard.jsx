@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, Outlet } from "react-router";
 import { LuShoppingBag } from "react-icons/lu";
-import { MdInventory } from "react-icons/md";
+import { MdInventory, MdPendingActions } from "react-icons/md";
 
 const Dashboard = () => {
   return (
@@ -92,6 +92,17 @@ const Dashboard = () => {
                 {/*Manage product icon */}
                 <MdInventory></MdInventory>
                 <span className="is-drawer-close:hidden">Manage Products</span>
+              </Link>
+            </li>
+            <li>
+              <Link
+                to={"/dashboard/pending-orders"}
+                className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                data-tip="Pending Orders"
+              >
+                {/*Pending Orders icon */}
+                <MdPendingActions></MdPendingActions>
+                <span className="is-drawer-close:hidden">Pending Orders</span>
               </Link>
             </li>
 
