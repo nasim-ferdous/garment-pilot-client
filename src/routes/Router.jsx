@@ -15,6 +15,8 @@ import PendingOrder from "../pages/Dashboard/PendingOrder/PendingOrder";
 import ApprovedOrders from "../pages/Dashboard/ApprovedOrders/ApprovedOrders";
 import MyProfile from "../pages/Dashboard/MyProfile/MyProfile";
 import ManageUsers from "../pages/Dashboard/ManageUsers/ManageUsers";
+import AdminAllProducts from "../pages/Dashboard/AdminAllProducts/AdminAllProducts";
+import AdminAllOrders from "../pages/Dashboard/AdminAllOrders/AdminAllOrders";
 
 export const router = createBrowserRouter([
   {
@@ -85,13 +87,21 @@ export const router = createBrowserRouter([
           },
           {
             path: "my-profile",
-            element:<MyProfile></MyProfile>,
+            element: <MyProfile></MyProfile>,
           },
           // admin related api
           {
             path: "manage-users",
-            element:<ManageUsers></ManageUsers>
-          }
+            element: <ManageUsers></ManageUsers>,
+          },
+          {
+            path: "admin-all-products",
+            element: <AdminAllProducts></AdminAllProducts>,
+          },
+          {
+            path: "admin-all-orders",
+            element: <AdminAllOrders></AdminAllOrders>,
+          },
         ],
       },
     ],

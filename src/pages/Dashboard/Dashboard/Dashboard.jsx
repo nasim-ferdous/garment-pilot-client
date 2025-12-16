@@ -2,7 +2,12 @@ import React from "react";
 import { Link, Outlet } from "react-router";
 import { LuShoppingBag } from "react-icons/lu";
 import { MdInventory, MdPendingActions } from "react-icons/md";
-import { FaClipboardCheck, FaUsers } from "react-icons/fa";
+import {
+  FaBoxes,
+  FaClipboardCheck,
+  FaClipboardList,
+  FaUsers,
+} from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";
 
 const Dashboard = () => {
@@ -142,6 +147,28 @@ const Dashboard = () => {
                 {/*Approved Orders icon */}
                 <FaUsers></FaUsers>
                 <span className="is-drawer-close:hidden">Manage Users</span>
+              </Link>
+            </li>
+            <li>
+              <Link
+                to={"/dashboard/admin-all-products"}
+                className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                data-tip="All Products"
+              >
+                {/*All Products icon */}
+                <FaBoxes></FaBoxes>
+                <span className="is-drawer-close:hidden">All Products</span>
+              </Link>
+            </li>
+            <li>
+              <Link
+                to={"/dashboard/admin-all-orders"}
+                className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                data-tip="All Orders"
+              >
+                {/*All Products icon */}
+                <FaClipboardList></FaClipboardList>
+                <span className="is-drawer-close:hidden">All Orders</span>
               </Link>
             </li>
 
