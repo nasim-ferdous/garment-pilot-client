@@ -8,14 +8,16 @@ import UpdateUserModal from "./UpdateUserModal";
 const ManageUsers = () => {
   const axiosSecure = useAxiosSecure();
   const [selectedUser, setSelectedUser] = useState(null);
+  const [searchText, setSearchText] = useState("");
   const {
     data: users = [],
     isLoading,
+    isFetching,
     refetch,
   } = useQuery({
-    queryKey: ["users"],
+    queryKey: ["users", searchText],
     queryFn: async () => {
-      const res = await axiosSecure(`/manage-users`);
+      const res = await axiosSecure(`/manage-users?searchText=${searchText}`);
       return res.data;
     },
   });
@@ -23,13 +25,47 @@ const ManageUsers = () => {
   {
     isLoading && <Loading />;
   }
+  {
+    isFetching && !isLoading && (
+      <span className="loading loading-spinner loading-sm ml-2"></span>
+    );
+  }
   return (
     <div className="p-4 md:p-8">
       <title>Manage Users</title>
       {/* Page Header */}
-      <div className="mb-6">
-        <h2 className="text-3xl font-bold">Manage Users</h2>
-        <p className="text-gray-500 mt-1">Total Users: {users.length}</p>
+      <div className="flex justify-between items-center">
+        <div className="mb-6">
+          <h2 className="text-3xl font-bold">Manage All Users</h2>
+          <p className="text-gray-500 mt-1">Total Users: {users.length}</p>
+        </div>
+        <div>
+          <label className="input">
+            <svg
+              className="h-[1em] opacity-50"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+            >
+              <g
+                strokeLinejoin="round"
+                strokeLinecap="round"
+                strokeWidth="2.5"
+                fill="none"
+                stroke="currentColor"
+              >
+                <circle cx="11" cy="11" r="8"></circle>
+                <path d="m21 21-4.3-4.3"></path>
+              </g>
+            </svg>
+            <input
+              onChange={(e) => setSearchText(e.target.value)}
+              type="search"
+              className="grow"
+              placeholder="Search by name or email"
+              value={searchText}
+            />
+          </label>
+        </div>
       </div>
 
       {/* Table Card */}

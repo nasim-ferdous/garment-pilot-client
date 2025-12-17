@@ -14,3 +14,18 @@
 body {
   font-family: "Roboto", sans-serif;
 }
+.navbar .active {
+  color: rgb(12, 76, 78);
+  font-weight: bold;
+  border: 1px solid #cac8c8ff;
+  border-radius: 20px;
+  background: rgb(132, 179, 187);
+}
+
+.drawer-side .active {
+  color: rgb(12, 76, 78);
+  font-weight: bold;
+  border: 1px solid #cac8c8ff;
+  border-radius: 20px;
+  background: rgb(132, 179, 187);
+}

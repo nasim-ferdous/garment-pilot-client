@@ -1,19 +1,24 @@
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
-import useAxiosSecure from "../../hooks/useAxiosSecure";
+import React, { useState } from "react";
 import ProductCard from "../../components/ProductCard/ProductCard";
 import Loading from "../../components/Loading/Loading";
+import useAxiosInstance from "../../hooks/UseAxiosInstance";
 
 const AllProducts = () => {
-  const axiosSecure = useAxiosSecure();
+  const axiosInstance = useAxiosInstance();
+  const [page, setPage] = useState(1);
+  const limit = 9;
 
-  const { data: products = [], isLoading } = useQuery({
-    queryKey: ["all-products"],
+  const { data, isLoading } = useQuery({
+    queryKey: ["all-products", page],
     queryFn: async () => {
-      const res = await axiosSecure.get("/products");
+      const res = await axiosInstance.get(
+        `/products?page=${page}&limit=${limit}`
+      );
       return res.data;
     },
   });
+  const { products = [], totalPages = 0 } = data || {};
   if (isLoading) {
     return <Loading></Loading>;
   }
@@ -28,6 +33,35 @@ const AllProducts = () => {
         {products.map((product) => (
           <ProductCard key={product._id} product={product} />
         ))}
+      </div>
+
+      {/* Pagination Controls */}
+      <div className="flex justify-center items-center mt-8 gap-2">
+        <button
+          disabled={page === 1}
+          onClick={() => setPage((prev) => prev - 1)}
+          className="btn btn-sm"
+        >
+          Previous
+        </button>
+
+        {[...Array(totalPages)].map((_, index) => (
+          <button
+            key={index}
+            onClick={() => setPage(index + 1)}
+            className={`btn btn-sm ${page === index + 1 ? "btn-primary" : ""}`}
+          >
+            {index + 1}
+          </button>
+        ))}
+
+        <button
+          disabled={page === totalPages}
+          onClick={() => setPage((prev) => prev + 1)}
+          className="btn btn-sm"
+        >
+          Next
+        </button>
       </div>
     </div>
   );

@@ -13,7 +13,7 @@ const Navbar = () => {
         <NavLink to={"/all-products"}>All-Product</NavLink>
       </li>
       <li>
-        <NavLink to={"/about"}>About Us</NavLink>
+        <NavLink to={"/about-us"}>About Us</NavLink>
       </li>
       <li>
         <NavLink to={"/contact"}>Contact</NavLink>
@@ -31,10 +31,6 @@ const Navbar = () => {
       </li>
       <li>
         <NavLink to={"/dashboard"}>Dashboard</NavLink>
-      </li>
-
-      <li>
-        <NavLink to={"/add-product"}>Add Product</NavLink>
       </li>
     </>
   );
@@ -133,7 +129,7 @@ const Navbar = () => {
                   {user.displayName || "user"}
                 </li>
                 <li>
-                  <NavLink to="/dashboard/profile">Profile</NavLink>
+                  <NavLink to="/dashboard/my-profile">Profile</NavLink>
                 </li>
                 <li>
                   <button onClick={logOutUser} className="text-red-500">

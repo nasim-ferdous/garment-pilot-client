@@ -17,6 +17,13 @@ import MyProfile from "../pages/Dashboard/MyProfile/MyProfile";
 import ManageUsers from "../pages/Dashboard/ManageUsers/ManageUsers";
 import AdminAllProducts from "../pages/Dashboard/AdminAllProducts/AdminAllProducts";
 import AdminAllOrders from "../pages/Dashboard/AdminAllOrders/AdminAllOrders";
+import AdminRoutes from "./AdminRoutes";
+import ManagerRoute from "./ManagerRoute";
+import BuyerRoute from "./BuyerRoute";
+import DashBoardHome from "../pages/Dashboard/DashBoardHome/DashBoardHome";
+import AboutUs from "../pages/AboutUs/AboutUs";
+import Contact from "../pages/Contact/Contact";
+import NotFound from "../pages/NotFound/NotFound";
 
 export const router = createBrowserRouter([
   {
@@ -36,6 +43,14 @@ export const router = createBrowserRouter([
         element: <Login></Login>,
       },
       {
+        path: "about-us",
+        element: <AboutUs></AboutUs>,
+      },
+      {
+        path: "contact",
+        element: <Contact></Contact>,
+      },
+      {
         path: "all-products",
         element: <AllProducts></AllProducts>,
       },
@@ -51,14 +66,7 @@ export const router = createBrowserRouter([
         path: "payment-success",
         element: <PaymentSuccess></PaymentSuccess>,
       },
-      {
-        path: "add-product",
-        element: (
-          <PrivetRoute>
-            <AddProduct></AddProduct>
-          </PrivetRoute>
-        ),
-      },
+
       {
         path: "dashboard",
         element: (
@@ -67,23 +75,52 @@ export const router = createBrowserRouter([
           </PrivetRoute>
         ),
         children: [
+          {
+            index: true,
+            element: <DashBoardHome></DashBoardHome>,
+          },
           // buyer related api
           {
             path: "my-orders",
-            element: <MyOrders></MyOrders>,
+            element: (
+              <BuyerRoute>
+                {" "}
+                <MyOrders></MyOrders>
+              </BuyerRoute>
+            ),
           },
           // manager related apis
           {
+            path: "add-product",
+            element: (
+              <ManagerRoute>
+                <AddProduct></AddProduct>
+              </ManagerRoute>
+            ),
+          },
+          {
             path: "manage-products",
-            element: <ManageProducts></ManageProducts>,
+            element: (
+              <ManagerRoute>
+                <ManageProducts></ManageProducts>
+              </ManagerRoute>
+            ),
           },
           {
             path: "pending-orders",
-            element: <PendingOrder></PendingOrder>,
+            element: (
+              <ManagerRoute>
+                <PendingOrder></PendingOrder>
+              </ManagerRoute>
+            ),
           },
           {
             path: "approved-orders",
-            element: <ApprovedOrders></ApprovedOrders>,
+            element: (
+              <ManagerRoute>
+                <ApprovedOrders></ApprovedOrders>
+              </ManagerRoute>
+            ),
           },
           {
             path: "my-profile",
@@ -92,17 +129,37 @@ export const router = createBrowserRouter([
           // admin related api
           {
             path: "manage-users",
-            element: <ManageUsers></ManageUsers>,
+            element: (
+              <AdminRoutes>
+                <ManageUsers></ManageUsers>
+              </AdminRoutes>
+            ),
           },
           {
             path: "admin-all-products",
-            element: <AdminAllProducts></AdminAllProducts>,
+            element: (
+              <AdminRoutes>
+                <AdminAllProducts></AdminAllProducts>
+              </AdminRoutes>
+            ),
           },
           {
             path: "admin-all-orders",
-            element: <AdminAllOrders></AdminAllOrders>,
+            element: (
+              <AdminRoutes>
+                <AdminAllOrders></AdminAllOrders>
+              </AdminRoutes>
+            ),
+          },
+          {
+            path: "*",
+            element: <NotFound></NotFound>,
           },
         ],
+      },
+      {
+        path: "*",
+        element: <NotFound></NotFound>,
       },
     ],
   },

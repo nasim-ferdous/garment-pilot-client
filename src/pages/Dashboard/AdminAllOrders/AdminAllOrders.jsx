@@ -59,7 +59,7 @@ const AdminAllOrders = () => {
               onChange={(e) => setSearchText(e.target.value)}
               type="search"
               className="grow"
-              placeholder="Search by name or category"
+              placeholder="Search by status"
               value={searchText}
             />
           </label>
