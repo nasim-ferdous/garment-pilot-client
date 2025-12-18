@@ -11,6 +11,8 @@
   --color-secondary: #2563eb;
 }
 
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
 body {
   font-family: "Roboto", sans-serif;
 }

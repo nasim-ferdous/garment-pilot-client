@@ -35,7 +35,9 @@ const AdminAllOrders = () => {
       <div className="flex justify-between items-center">
         <div className="mb-6">
           <h2 className="text-3xl font-bold">Manage All Orders</h2>
-          <p className="text-gray-500 mt-1">Total Orders: {orders.length}</p>
+          <p className="text-gray-500 dark:text-gray-400 mt-1">
+            Total Orders: {orders.length}
+          </p>
         </div>
         <div>
           <label className="input">
@@ -66,16 +68,16 @@ const AdminAllOrders = () => {
         </div>
       </div>
 
-      <div className="card bg-base-100 shadow-xl">
+      <div className="card bg-base-100 dark:bg-indigo-300 shadow-xl">
         <div className="card-body p-0">
-          <div className="overflow-x-auto">
-            <table className="table table-zebra">
+          <div className="overflow-x-auto w-full">
+            <table className="table table-zebra min-w-[900px]">
               {/* head */}
               <thead className="bg-base-200 text-base">
                 <tr>
                   <th>#</th>
                   <th>Product</th>
-                  <th>User</th>
+                  <th>Buyer</th>
                   <th>Quantity</th>
                   <th>Status</th>
                   <th className="text-center">Actions</th>
@@ -112,7 +114,7 @@ const AdminAllOrders = () => {
                       </span>
                     </td>
 
-                    <td className="text-center">
+                    <td className="whitespace-normal">
                       <div className="flex justify-center gap-2">
                         <div className="tooltip" data-tip="View detail">
                           <button

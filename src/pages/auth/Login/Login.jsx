@@ -26,14 +26,14 @@ const Login = () => {
       });
   };
   return (
-    <div className="hero bg-base-200 min-h-screen">
+    <div className="hero bg-indigo-300 dark:bg-zinc-700  min-h-screen">
       <title>garment-pilot-login</title>
       <div className="hero-content flex-col lg:flex-row-reverse">
         <div className="text-center lg:text-left">
           <h1 className="text-5xl font-bold">Welcome Back</h1>
           <p className="py-6">Enter your email and password to continue.</p>
         </div>
-        <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
+        <div className="card bg-base-100 dark:bg-indigo-400 w-full max-w-sm shrink-0 shadow-2xl">
           <div className="card-body">
             <form onSubmit={handleSubmit(onSubmit)}>
               <fieldset className="fieldset">
@@ -71,7 +71,7 @@ const Login = () => {
                 <Link
                   state={location.state}
                   to={"/register"}
-                  className="text-green-500"
+                  className="text-green-500 dark:text-zinc-300"
                 >
                   Register
                 </Link>

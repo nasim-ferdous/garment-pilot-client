@@ -1,16 +1,17 @@
 import React from "react";
-import useAxiosSecure from "../../../hooks/useAxiosSecure";
+
 import { useQuery } from "@tanstack/react-query";
 import Loading from "../../../components/Loading/Loading";
 import ProductCard from "../../../components/ProductCard/ProductCard";
+import useAxiosInstance from "../../../hooks/UseAxiosInstance";
 
 const OurProducts = () => {
-  const axiosSecure = useAxiosSecure();
+  const axiosInstance = useAxiosInstance();
 
   const { data: products = [], isLoading } = useQuery({
     queryKey: ["our-products"],
     queryFn: async () => {
-      const res = await axiosSecure.get("/our-products?showOnHomePage=true");
+      const res = await axiosInstance.get("/our-products?showOnHomePage=true");
       return res.data;
     },
   });

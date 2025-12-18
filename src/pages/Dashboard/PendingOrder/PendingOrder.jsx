@@ -7,11 +7,13 @@ import { MdOutlineDoneAll, MdCancel } from "react-icons/md";
 import Swal from "sweetalert2";
 import { BiDetail } from "react-icons/bi";
 import ViewOrderModal from "./ViewOrderModal";
+import useSuspended from "../../../hooks/useSuspended";
 
 const PendingOrder = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const [selectedOrder, setSelectedOrder] = useState(null);
+  const { isSuspended, suspendedLoading } = useSuspended();
 
   const {
     data: orders = [],
@@ -78,8 +80,15 @@ const PendingOrder = () => {
       }
     });
   };
+  const handleSuspend = () => {
+    Swal.fire({
+      title: "Suspended",
+      text: "You are suspended by admin. check your profile",
+      icon: "question",
+    });
+  };
   {
-    isLoading && <Loading />;
+    if (suspendedLoading && isLoading) return <Loading />;
   }
   return (
     <div className="p-4 md:p-8">
@@ -93,10 +102,10 @@ const PendingOrder = () => {
       </div>
 
       {/* Table Card */}
-      <div className="card bg-base-100 shadow-xl">
+      <div className="card bg-base-100 dark:bg-indigo-300 shadow-xl">
         <div className="card-body p-0">
           <div className="overflow-x-auto">
-            <table className="table table-zebra">
+            <table className="table table-zebra min-w-[900px]">
               {/* head */}
               <thead className="bg-base-200 text-base">
                 <tr>
@@ -123,25 +132,47 @@ const PendingOrder = () => {
 
                     <td>{order.orderedAt}</td>
 
-                    <td className="text-center">
-                      <div className="flex justify-center gap-2">
-                        <div className="tooltip" data-tip="Approve Order">
-                          <button
-                            onClick={() => handleApproveOrder(order)}
-                            className="btn btn-primary btn-xs"
-                          >
-                            <MdOutlineDoneAll></MdOutlineDoneAll>
-                          </button>
-                        </div>
+                    <td className="whitespace-normal">
+                      <div className="flex flex-col sm:flex-row justify-center gap-2">
+                        {isSuspended ? (
+                          <div className="tooltip" data-tip="Approve Order">
+                            <button
+                              onClick={handleSuspend}
+                              className="btn btn-primary btn-xs"
+                            >
+                              <MdOutlineDoneAll></MdOutlineDoneAll>
+                            </button>
+                          </div>
+                        ) : (
+                          <div className="tooltip" data-tip="Approve Order">
+                            <button
+                              onClick={() => handleApproveOrder(order)}
+                              className="btn btn-primary btn-xs"
+                            >
+                              <MdOutlineDoneAll></MdOutlineDoneAll>
+                            </button>
+                          </div>
+                        )}
+                        {isSuspended ? (
+                          <div className="tooltip" data-tip="Reject Order">
+                            <button
+                              onClick={handleSuspend}
+                              className="btn btn-error btn-xs"
+                            >
+                              <MdCancel></MdCancel>
+                            </button>
+                          </div>
+                        ) : (
+                          <div className="tooltip" data-tip="Reject Order">
+                            <button
+                              onClick={() => handleRejectOrder(order)}
+                              className="btn btn-error btn-xs"
+                            >
+                              <MdCancel></MdCancel>
+                            </button>
+                          </div>
+                        )}
 
-                        <div className="tooltip" data-tip="Reject Order">
-                          <button
-                            onClick={() => handleRejectOrder(order)}
-                            className="btn btn-error btn-xs"
-                          >
-                            <MdCancel></MdCancel>
-                          </button>
-                        </div>
                         <div className="tooltip" data-tip="View Order">
                           <button
                             onClick={() => setSelectedOrder(order)}

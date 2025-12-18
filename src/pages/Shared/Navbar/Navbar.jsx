@@ -1,9 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router";
 import useAuth from "../../../hooks/useAuth";
 
 const Navbar = () => {
   const { user, logOutUser } = useAuth();
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+  useEffect(() => {
+    const html = document.querySelector("html");
+    html.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+  const handleTheme = (checked) => {
+    setTheme(checked ? "dark" : "light");
+  };
+
   const mainLinks = (
     <>
       <li>
@@ -35,7 +45,7 @@ const Navbar = () => {
     </>
   );
   return (
-    <div className="navbar bg-indigo-400 shadow-md sticky top-0 z-50">
+    <div className="navbar bg-indigo-400 dark:bg-zinc-600 shadow-md sticky top-0 z-50">
       {/* LEFT - LOGO */}
       <div className="navbar-start">
         {/* Mobile Dropdown */}
@@ -136,6 +146,12 @@ const Navbar = () => {
                     Logout
                   </button>
                 </li>
+                <input
+                  onChange={(e) => handleTheme(e.target.checked)}
+                  type="checkbox"
+                  defaultChecked={localStorage.getItem("theme") === "dark"}
+                  className="toggle mb-2"
+                />
               </ul>
             </div>
           </>

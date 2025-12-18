@@ -20,7 +20,7 @@ const HowItWorks = () => {
     },
   ];
   return (
-    <section className="px-6 md:px-16 space-y-12 text-center">
+    <div className="px-6 md:px-16  space-y-12 text-center">
       <h2 className="text-3xl font-bold">How It Works</h2>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
@@ -31,7 +31,7 @@ const HowItWorks = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="p-8 bg-base-200 rounded-2xl shadow"
+            className="p-8 bg-base-200 dark:bg-indigo-300 rounded-2xl shadow"
           >
             <div className="text-5xl font-extrabold mb-4">{s.step}</div>
             <h3 className="text-xl font-bold mb-2">{s.title}</h3>
@@ -39,7 +39,7 @@ const HowItWorks = () => {
           </motion.div>
         ))}
       </div>
-    </section>
+    </div>
   );
 };
 

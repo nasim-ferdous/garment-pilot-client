@@ -16,6 +16,7 @@ const MyProfile = () => {
       return res.data;
     },
   });
+  const showStatus = user.role === "buyer" || user.role === "manager";
 
   if (isLoading) return <Loading />;
 
@@ -23,7 +24,7 @@ const MyProfile = () => {
     <div className="p-4 md:p-8 max-w-3xl mx-auto">
       <title>My Profile</title>
 
-      <div className="card bg-base-100 shadow-xl">
+      <div className="card bg-base-100 dark:bg-indigo-300 shadow-xl">
         <div className="card-body items-center text-center">
           {/* Avatar */}
           <div className="avatar">
@@ -54,12 +55,40 @@ const MyProfile = () => {
             <div>
               <span className="font-semibold">Joined: {user.createdAt}</span>
             </div>
+
+            {/* Status Section */}
+            {showStatus && (
+              <div className="mt-3">
+                <span className="font-semibold">Status: </span>
+                <span
+                  className={`ml-1 ${
+                    user.status === "suspended"
+                      ? "text-error font-bold"
+                      : "text-success"
+                  }`}
+                >
+                  {user.status || "N/A"}
+                </span>
+
+                {/* Suspend reason if suspended */}
+                {user.status === "suspended" && user.suspendReason && (
+                  <div className="mt-1 text-sm text-gray-500">
+                    Reason: {user.suspendReason}
+                  </div>
+                )}
+                {user.status === "suspended" && user.suspendFeedback && (
+                  <div className="mt-1 text-sm text-gray-500">
+                    Feedback: {user.suspendFeedback}
+                  </div>
+                )}
+              </div>
+            )}
           </div>
 
           {/* Logout */}
           <button
             onClick={logOutUser}
-            className="btn btn-error btn-outline mt-6 w-full"
+            className="btn btn-error btn-outline mt-6 w-full flex items-center justify-center"
           >
             <FiLogOut className="mr-2 text-lg" />
             Logout

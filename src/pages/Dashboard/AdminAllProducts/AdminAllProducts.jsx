@@ -86,7 +86,7 @@ const AdminAllProducts = () => {
       <div className="flex justify-between items-center">
         <div className="mb-6">
           <h2 className="text-3xl font-bold">Manage All Products</h2>
-          <p className="text-gray-500 mt-1">
+          <p className="text-gray-500 dark:text-gray-400 mt-1">
             Total Products: {products.length}
           </p>
         </div>
@@ -119,10 +119,10 @@ const AdminAllProducts = () => {
         </div>
       </div>
 
-      <div className="card bg-base-100 shadow-xl">
+      <div className="card bg-base-100 dark:bg-indigo-300 shadow-xl">
         <div className="card-body p-0">
-          <div className="overflow-x-auto">
-            <table className="table table-zebra">
+          <div className="overflow-x-auto w-full">
+            <table className="table table-zebra min-w-[900px]">
               {/* head */}
               <thead className="bg-base-200 text-base">
                 <tr>
@@ -183,8 +183,8 @@ const AdminAllProducts = () => {
                       />
                     </td>
 
-                    <td className="text-center">
-                      <div className="flex justify-center gap-2">
+                    <td className="whitespace-normal">
+                      <div className="flex flex-col sm:flex-row justify-center gap-2">
                         <div className="tooltip" data-tip="Update Product">
                           <button
                             onClick={() => setSelectedProduct(product)}

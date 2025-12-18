@@ -3,8 +3,8 @@ import { FaCheckCircle, FaShippingFast, FaUsers } from "react-icons/fa";
 
 const AboutUs = () => {
   return (
-    <div className="min-h-screen bg-base-100">
-        <title>About Us</title>
+    <div className="min-h-screen bg-base-100 dark:bg-zinc-700">
+      <title>About Us</title>
       {/* Hero Section */}
       <section className="bg-primary text-white py-16">
         <div className="max-w-6xl mx-auto px-4 text-center">
@@ -24,13 +24,13 @@ const AboutUs = () => {
           {/* Text */}
           <div>
             <h2 className="text-3xl font-bold mb-4">Who We Are</h2>
-            <p className="text-gray-600 mb-4 leading-relaxed">
+            <p className="text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
               Our platform is designed to simplify product management, order
               processing, and real-time tracking. We connect buyers, managers,
               and administrators in one unified system to ensure efficiency and
               transparency at every step.
             </p>
-            <p className="text-gray-600 leading-relaxed">
+            <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
               From placing an order to final delivery, our goal is to make the
               entire journey smooth, secure, and easy to understand.
             </p>
@@ -48,7 +48,7 @@ const AboutUs = () => {
       </section>
 
       {/* Features */}
-      <section className="bg-base-200 py-16">
+      <section className="bg-base-200 dark:bg-zinc-700 py-16">
         <div className="max-w-6xl mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-10">
             Why Choose Us
@@ -56,7 +56,7 @@ const AboutUs = () => {
 
           <div className="grid md:grid-cols-3 gap-8">
             {/* Feature 1 */}
-            <div className="card bg-base-100 shadow-md p-6 text-center">
+            <div className="card bg-base-100 dark:bg-indigo-400 shadow-md p-6 text-center">
               <FaShippingFast className="text-4xl text-primary mx-auto mb-4" />
               <h3 className="text-xl font-semibold mb-2">Real-Time Tracking</h3>
               <p className="text-gray-600">
@@ -66,7 +66,7 @@ const AboutUs = () => {
             </div>
 
             {/* Feature 2 */}
-            <div className="card bg-base-100 shadow-md p-6 text-center">
+            <div className="card bg-base-100 dark:bg-indigo-400 shadow-md p-6 text-center">
               <FaUsers className="text-4xl text-primary mx-auto mb-4" />
               <h3 className="text-xl font-semibold mb-2">
                 Role-Based Dashboards
@@ -78,7 +78,7 @@ const AboutUs = () => {
             </div>
 
             {/* Feature 3 */}
-            <div className="card bg-base-100 shadow-md p-6 text-center">
+            <div className="card bg-base-100 dark:bg-indigo-400 shadow-md p-6 text-center">
               <FaCheckCircle className="text-4xl text-primary mx-auto mb-4" />
               <h3 className="text-xl font-semibold mb-2">Trusted & Secure</h3>
               <p className="text-gray-600">
@@ -92,7 +92,7 @@ const AboutUs = () => {
       {/* Mission */}
       <section className="max-w-6xl mx-auto px-4 py-16 text-center">
         <h2 className="text-3xl font-bold mb-4">Our Mission</h2>
-        <p className="max-w-3xl mx-auto text-gray-600 leading-relaxed">
+        <p className="max-w-3xl mx-auto text-gray-600 dark:text-gray-400 leading-relaxed">
           Our mission is to build a modern, user-friendly platform that improves
           order management efficiency, enhances communication, and delivers
           trust through transparency.

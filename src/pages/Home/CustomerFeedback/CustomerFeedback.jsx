@@ -34,7 +34,7 @@ const CustomerFeedback = () => {
     },
   ];
   return (
-    <section className="px-6 md:px-16 text-center space-y-10">
+    <div className="px-6 md:px-16  text-center space-y-10">
       <h2 className="text-3xl font-bold">Customer Feedback</h2>
 
       <Swiper
@@ -52,7 +52,7 @@ const CustomerFeedback = () => {
       >
         {feedbackList.map((feedback, i) => (
           <SwiperSlide key={i}>
-            <div className="w-full p-10 bg-base-200 text-center rounded-xl shadow-xl mx-auto max-w-3xl">
+            <div className="w-full p-10 bg-base-200 dark:bg-indigo-300 text-center rounded-xl shadow-xl mx-auto max-w-3xl">
               <p className="text-lg max-w-2xl mx-auto mb-4">
                 ❝ {feedback.text} ❞
               </p>
@@ -61,7 +61,7 @@ const CustomerFeedback = () => {
           </SwiperSlide>
         ))}
       </Swiper>
-    </section>
+    </div>
   );
 };
 

@@ -4,6 +4,9 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAuth from "../../hooks/useAuth";
+import useSuspended from "../../hooks/useSuspended";
+import Loading from "../../components/Loading/Loading";
+import Swal from "sweetalert2";
 
 const AddProduct = () => {
   const {
@@ -15,6 +18,7 @@ const AddProduct = () => {
   const { user } = useAuth();
 
   const [previews, setPreviews] = useState([]);
+  const { isSuspended, suspendedLoading } = useSuspended();
 
   const MAX_IMAGES = 3;
 
@@ -92,7 +96,13 @@ const AddProduct = () => {
       };
       axiosSecure.post("/products", productPayload).then((res) => {
         if (res.data.insertedId) {
-          toast.success("Product added successfully!");
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Product added successfully",
+            showConfirmButton: false,
+            timer: 1500,
+          });
         } else {
           toast.error("Failed to add product.");
         }
@@ -104,13 +114,21 @@ const AddProduct = () => {
       toast.error("An error occurred while uploading images.");
     }
   };
+  const handleSuspended = () => {
+    Swal.fire({
+      title: "Suspended",
+      text: "You are suspended by admin. check your profile",
+      icon: "question",
+    });
+  };
+  if (suspendedLoading) return <Loading></Loading>;
 
   return (
     <div className="flex flex-col justify-center items-center gap-6">
       <title>Add-products</title>
       <h3 className="text-4xl text-center">Add your product</h3>
       <form className="w-full max-w-md mb-8" onSubmit={handleSubmit(onSubmit)}>
-        <div className="card bg-base-200 shrink-0 shadow-2xl">
+        <div className="card bg-base-200 dark:bg-indigo-300 shrink-0 shadow-2xl">
           <div className="card-body">
             <fieldset className="fieldset">
               {/* name */}
@@ -260,8 +278,16 @@ const AddProduct = () => {
                 defaultChecked={false}
                 className="checkbox checkbox-xl"
               />
-
-              <button className="btn btn-primary mt-4">Submit</button>
+              {isSuspended ? (
+                <button
+                  onClick={handleSuspended}
+                  className="btn btn-primary mt-4"
+                >
+                  Submit
+                </button>
+              ) : (
+                <button className="btn btn-primary mt-4">Submit</button>
+              )}
             </fieldset>
           </div>
         </div>

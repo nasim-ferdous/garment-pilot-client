@@ -64,7 +64,7 @@ const Register = () => {
   };
 
   return (
-    <div className="hero bg-base-200 min-h-screen">
+    <div className="hero bg-base-200 dark:bg-zinc-700 min-h-screen">
       <title>garment-pilot-register</title>
       <div className="hero-content flex-col lg:flex-row-reverse">
         <div className="text-center lg:text-left">
@@ -75,7 +75,7 @@ const Register = () => {
             designed for you.
           </p>
         </div>
-        <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
+        <div className="card bg-base-100 dark:bg-indigo-400 w-full max-w-sm shrink-0 shadow-2xl">
           <div className="card-body">
             <form onSubmit={handleSubmit(onSubmit)}>
               <fieldset className="fieldset">
@@ -170,7 +170,7 @@ const Register = () => {
                 <Link
                   state={location.state}
                   to={"/login"}
-                  className="text-green-500"
+                  className="text-green-500 dark:text-zinc-300"
                 >
                   Login
                 </Link>

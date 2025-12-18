@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 const ManagersInfo = () => {
   return (
-    <section className="px-6 md:px-16 space-y-10">
+    <div className="px-6 md:px-16 space-y-10">
       <h2 className="text-3xl font-bold text-center">Management Team</h2>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
@@ -30,7 +30,7 @@ const ManagersInfo = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="card bg-base-100 shadow-xl rounded-xl p-6 text-center"
+            className="card bg-base-100 dark:bg-indigo-300 shadow-xl rounded-xl p-6 text-center"
           >
             <img
               src={m.img}
@@ -42,7 +42,7 @@ const ManagersInfo = () => {
           </motion.div>
         ))}
       </div>
-    </section>
+    </div>
   );
 };
 

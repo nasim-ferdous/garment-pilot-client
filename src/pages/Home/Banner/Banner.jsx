@@ -15,7 +15,7 @@ const Banner = () => {
           Premium Garments for Your Lifestyle
         </h1>
 
-        <p className="text-gray-600 text-lg">
+        <p className="text-gray-600 dark:text-gray-400 text-lg">
           Explore premium-quality garments crafted with style, comfort, and
           innovation — perfect for every occasion.
         </p>

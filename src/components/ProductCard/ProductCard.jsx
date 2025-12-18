@@ -5,7 +5,7 @@ const ProductCard = ({ product }) => {
   const { _id, name, category, price, quantity, images } = product;
 
   return (
-    <div className="card bg-base-100 shadow-xl rounded-xl hover:shadow-2xl duration-300">
+    <div className="card bg-base-100 dark:bg-indigo-300 shadow-xl rounded-xl hover:shadow-2xl duration-300">
       {/* IMAGE */}
       <figure>
         <img

@@ -5,13 +5,15 @@ import Swal from "sweetalert2";
 const UpdateUserModal = ({ user, onClose, refetch }) => {
   const axiosSecure = useAxiosSecure();
   const [status, setStatus] = useState(user.status || "approved");
-  const [reason, setReason] = useState("");
+  const [reason, setReason] = useState(user.suspendReason || "");
+  const [feedback, setFeedback] = useState(user.suspendFeedback || "");
 
   const handleUpdate = async () => {
     try {
       await axiosSecure.patch(`/users/${user._id}/status`, {
         status,
         suspendReason: status === "suspended" ? reason : "",
+        suspendFeedback: status === "suspended" ? feedback : "",
       });
       Swal.fire({
         position: "top-end",
@@ -55,6 +57,14 @@ const UpdateUserModal = ({ user, onClose, refetch }) => {
                 placeholder="Why is this user suspended?"
                 value={reason}
                 onChange={(e) => setReason(e.target.value)}
+              />
+
+              <label className="label mt-4">Suspend Feedback</label>
+              <textarea
+                className="textarea textarea-bordered w-full"
+                placeholder="Write feedback that the user will see"
+                value={feedback}
+                onChange={(e) => setFeedback(e.target.value)}
               />
             </>
           )}

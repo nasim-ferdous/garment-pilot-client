@@ -6,6 +6,8 @@ import Loading from "../../components/Loading/Loading";
 import useAuth from "../../hooks/useAuth";
 import BookingModal from "../../components/BookingModal/BookingModal";
 import toast from "react-hot-toast";
+import useSuspended from "../../hooks/useSuspended";
+import Swal from "sweetalert2";
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -13,6 +15,7 @@ const ProductDetail = () => {
   const [openModal, setOpenModal] = useState(false);
   const { user } = useAuth();
   const navigate = useNavigate();
+  const { isSuspended, suspendedLoading } = useSuspended();
 
   const {
     data: product = {},
@@ -42,14 +45,27 @@ const ProductDetail = () => {
     console.log(res.data);
 
     if (res.data.orderId) {
-      toast.success("Booking successful!");
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Booking is successfully done",
+        showConfirmButton: false,
+        timer: 1500,
+      });
       setOpenModal(false);
       refetch();
       navigate("/dashboard/my-orders");
     }
   };
+  const handleSuspended = () => {
+    Swal.fire({
+      title: "Suspended",
+      text: "You are suspended by admin. check your profile",
+      icon: "question",
+    });
+  };
 
-  if (isLoading) return <Loading></Loading>;
+  if (isLoading && suspendedLoading) return <Loading></Loading>;
 
   return (
     <div>
@@ -110,12 +126,21 @@ const ProductDetail = () => {
           </div>
 
           {/* Order Button */}
-          <button
-            onClick={() => setOpenModal(true)}
-            className="btn btn-primary btn-lg mt-6 w-full md:w-auto"
-          >
-            Book Now
-          </button>
+          {isSuspended ? (
+            <button
+              onClick={handleSuspended}
+              className="btn btn-primary btn-lg mt-6 w-full md:w-auto"
+            >
+              Book Now
+            </button>
+          ) : (
+            <button
+              onClick={() => setOpenModal(true)}
+              className="btn btn-primary btn-lg mt-6 w-full md:w-auto"
+            >
+              Book Now
+            </button>
+          )}
         </div>
       </div>
       {openModal && (
