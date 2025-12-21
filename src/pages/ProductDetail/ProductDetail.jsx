@@ -5,7 +5,6 @@ import { useQuery } from "@tanstack/react-query";
 import Loading from "../../components/Loading/Loading";
 import useAuth from "../../hooks/useAuth";
 import BookingModal from "../../components/BookingModal/BookingModal";
-import toast from "react-hot-toast";
 import useSuspended from "../../hooks/useSuspended";
 import Swal from "sweetalert2";
 

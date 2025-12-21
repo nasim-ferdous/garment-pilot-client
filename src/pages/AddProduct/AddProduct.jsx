@@ -7,6 +7,7 @@ import useAuth from "../../hooks/useAuth";
 import useSuspended from "../../hooks/useSuspended";
 import Loading from "../../components/Loading/Loading";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router";
 
 const AddProduct = () => {
   const {
@@ -19,6 +20,7 @@ const AddProduct = () => {
 
   const [previews, setPreviews] = useState([]);
   const { isSuspended, suspendedLoading } = useSuspended();
+  const navigate = useNavigate();
 
   const MAX_IMAGES = 3;
 
@@ -103,6 +105,7 @@ const AddProduct = () => {
             showConfirmButton: false,
             timer: 1500,
           });
+          navigate("/dashboard/manage-products");
         } else {
           toast.error("Failed to add product.");
         }
