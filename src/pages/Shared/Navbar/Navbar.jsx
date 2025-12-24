@@ -88,10 +88,7 @@ const Navbar = () => {
         </div>
 
         {/* Logo */}
-        <Link
-          to={"/"}
-          className="btn btn-ghost text-2xl font-bold tracking-wide"
-        >
+        <Link to={"/"} className="text-2xl font-bold tracking-wide">
           GarmentPilot
         </Link>
       </div>
@@ -104,14 +101,14 @@ const Navbar = () => {
       </div>
 
       {/* RIGHT SIDE */}
-      <div className="navbar-end space-x-3">
+      <div className="navbar-end space-x-2">
         {/* IF LOGGED OUT */}
         {!user && (
           <>
-            <Link to={"/login"} className="btn  btn-primary">
+            <Link to={"/login"} className="btn  btn-primary btn-xs md:btn-sm">
               Login
             </Link>
-            <Link to={"/register"} className="btn btn-primary">
+            <Link to={"/register"} className="btn btn-primary btn-xs md:btn-sm">
               Register
             </Link>
           </>
